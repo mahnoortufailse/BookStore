@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "book": "Echoes of the Past",
+    "title": "A riveting journey through forgotten histories.",
+    "price": "$18.99",
+    "category": "free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 2,
+    "book": "Shadows in the Night",
+    "title": "A suspenseful tale shrouded in mystery and intrigue.",
+    "price": "$26.99",
+    "category": "free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 3,
+    "book": "Voyage Beyond the Stars",
+    "title": "An exhilarating exploration of the universe’s wonders.",
+    "price": "$16.49",
+    "category": "paid",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 4,
+    "book": "Ancient Whispers",
+    "title": "Deciphering the enigmatic messages of a lost culture.",
+    "price": "$23.99",
+    "category": "paid",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 5,
+    "book": "Mystical Realms",
+    "title": "A journey into a world of fantasy and enchantment.",
+    "price": "$19.50",
+    "category": "free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 6,
+    "book": "The Enchanted Forest",
+    "title": "An exploration of a forest brimming with magic and wonder.",
+    "price": "$22.00",
+    "category": "free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 7,
+    "book": "Depths of the Abyss",
+    "title": "A dive into the uncharted territories of the deep sea.",
+    "price": "$32.00",
+    "category": "free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 8,
+    "book": "Moments in Time",
+    "title": "A touching narrative of cherished memories and emotions.",
+    "price": "$18.50",
+    "category": "free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 9,
+    "book": "Stand Against the Storm",
+    "title": "A powerful saga of survival and strength amidst adversity.",
+    "price": "$28.99",
+    "category": "paid",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  },
+  {
+    "id": 10,
+    "book": "Eras of Eternity",
+    "title": "A sweeping epic across various epochs and ages.",
+    "price": "$14.99",
+    "category": "free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1722885848~exp=1722889448~hmac=029976f7d3dca39b2dc7445b5f2cdfa6d2dc6ae9a2cfa094b06f726a4921a596&w=740"
+  }
+]

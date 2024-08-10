@@ -4,7 +4,7 @@ const Footer = () => {
     <>
     <div>
     <hr className="border-gray-300 dark:border-black" />
-    <footer className="footer footer-center text-base-content rounded p-10 dark:text-white">
+    <footer className="footer footer-center rounded p-10 dark:text-white text-gray-900">
   <nav className="grid grid-flow-col gap-4">
     <a className="link link-hover">About us</a>
     <a className="link link-hover">Contact</a>

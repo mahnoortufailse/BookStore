@@ -1,23 +1,26 @@
-import { useFormik } from 'formik';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import SuccessModal from '../components/SuccessModal';
+/* eslint-disable no-unused-vars */
+import { useFormik } from "formik";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import SuccessModal from "../components/SuccessModal";
+import axios from "axios";
+import toast from "react-hot-toast"; // Ensure using the right toast library
 
 const validate = (values) => {
   const errors = {};
 
   // Email validation
   if (!values.email) {
-    errors.email = 'Email is required';
+    errors.email = "Email is required";
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = "Email is invalid";
   }
 
   // Password validation
   if (!values.password) {
-    errors.password = 'Password is required';
+    errors.password = "Password is required";
   } else if (values.password.length < 6) {
-    errors.password = 'Password must be at least 6 characters';
+    errors.password = "Password must be at least 6 characters";
   }
 
   return errors;
@@ -28,39 +31,61 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     validate,
-    onSubmit: (values) => {
-      console.log('Form Data:', values);
-      setShowSuccessModal(true);
-      setTimeout(() => {
-        setShowSuccessModal(false); // Hide the success modal after 1 second
-        formik.resetForm(); // Reset form fields after submission
-      }, 1000);
-      // Optionally, you can close the modal here if it's needed
-      document.getElementById('my_modal_3').close();
+    onSubmit: async (data) => {
+      const userInfo = {
+        email: data.email,
+        password: data.password,
+      };
+      try {
+        const res = await axios.post(
+          "http://localhost:4000/user/login",
+          userInfo
+        );
+        console.log(res.data);
+        if (res.data) {
+          toast.success("Logged in Successfully!");
+          setShowSuccessModal(true);
+          setTimeout(() => {
+            setShowSuccessModal(false); // Hide the success modal after 1 second
+            document.getElementById("my_modal_3").close(); // Close the modal
+          }, 1000);
+
+          localStorage.setItem("Users", JSON.stringify(res.data.user));
+          formik.resetForm();
+        }
+      } catch (err) {
+        if (err.response) {
+          console.log(err);
+          toast.error("Error: " + err.response.data.message);
+          setTimeout(() => {}, 2000);
+        }
+      }
     },
   });
 
   return (
     <>
-      <div className="dark:text-black">
+      <div>
         <dialog id="my_modal_3" className="modal">
-          <div className="modal-box">
+          <div className="modal-box bg-white dark:bg-slate-900">
             <form onSubmit={formik.handleSubmit}>
-              <Link
-                to="/"
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                onClick={() => document.getElementById('my_modal_3').close()}
+              <button
+                type="button"
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-black dark:text-white"
+                onClick={() => document.getElementById("my_modal_3").close()}
               >
                 ✕
-              </Link>
-              <h3 className="font-bold text-xl">Login</h3>
+              </button>
+              <h3 className="font-bold text-xl dark:text-gray-500 text-black">
+                Login
+              </h3>
 
               <div className="mt-4 space-y-2 text-left">
-                <span>Email</span>
+                <span className="text-black dark:text-gray-500">Email</span>
                 <br />
                 <input
                   type="email"
@@ -69,7 +94,7 @@ const Login = () => {
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className="w-80 px-3 py-1 border rounded-md outline-none"
+                  className="w-80 px-3 py-1 border rounded-md dark:bg-slate-950 outline-none bg-gray-100 text-black dark:text-gray-600"
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <div className="error text-red-500 text-xs font-poppins italic">
@@ -78,7 +103,7 @@ const Login = () => {
                 ) : null}
               </div>
               <div className="mt-4 space-y-2 text-left">
-                <span>Password</span>
+                <span className="text-black dark:text-gray-500">Password</span>
                 <br />
                 <input
                   type="password"
@@ -87,7 +112,7 @@ const Login = () => {
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className="w-80 px-3 py-1 border rounded-md outline-none"
+                  className="w-80 px-3 py-1 border rounded-md outline-none bg-gray-100 peer-focus:bg-gray-200 dark:text-gray-600 dark:bg-slate-950"
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <div className="error text-red-500 text-xs font-poppins italic">
@@ -102,24 +127,24 @@ const Login = () => {
                 >
                   Login
                 </button>
-                <p className="text-sm">
-                  Not registered?{' '}
+                <p className="text-sm dark:text-gray-400 text-black">
+                  Not registered?{" "} 
                   <Link
                     to="/signup"
                     className="underline text-blue-500 cursor-pointer text-base"
-                    onClick={() => document.getElementById('my_modal_3').close()}
+                    onClick={() =>
+                      document.getElementById("my_modal_3").close()
+                    }
                   >
                     Signup
-                  </Link>{' '}
-                </p>
+                  </Link>{" "}
+                  </p>
               </div>
             </form>
           </div>
         </dialog>
         {/* Display the success modal if showSuccessModal is true */}
-        {showSuccessModal && (
-          <SuccessModal message="LogIn Successfully" />
-        )}
+        {showSuccessModal && <SuccessModal message="Logged in Successfully" />}
       </div>
     </>
   );

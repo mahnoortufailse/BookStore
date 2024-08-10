@@ -1,7 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import Login from "../pages/Login";
+import { useAuth } from "../context/AuthProvider";
+import LogOut from "../pages/LogOut";
 
 const Navbar = () => {
+  const [authUser, setAuthUser] = useAuth()
   const navList = (
     <>
       <li>
@@ -46,7 +50,7 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`max-w-screen-2xl container mx-auto md:px-20 px-4 dark:bg-slate-800 dark:text-white fixed top-0 left-0 right-0 z-50 ${
+        className={`max-w-screen-2xl container mx-auto md:px-20 px-4 dark:bg-slate-800 dark:text-white fixed top-0 left-0 right-0 z-50 bg-gray-50 text-black ${
           sticky
             ? "sticky-navbar shadow-md bg-base-200 dark:bg-slate-700 dark:text-white duration-300 transition-all ease-in-out"
             : ""
@@ -86,7 +90,7 @@ const Navbar = () => {
             </div>
             <div className="hidden md:block">
               <label className="px-3 py-2 border rounded-md flex items-center gap-2">
-                <input type="text" className="grow outline-none rounded-md px-1 dark:bg-slate-800 dark:text-white" placeholder="Search" />
+                <input type="text" className="grow outline-none rounded-md px-1 dark:bg-slate-800 dark:text-white bg-gray-50" placeholder="Search" />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -124,12 +128,15 @@ const Navbar = () => {
                 />
               </svg>
             </label>
-            <div>
+            {
+              authUser ? (<LogOut/>) : <div>
               <a className="bg-black text-white px-5 py-3 rounded-md hover:bg-slate-800 cursor-pointer duration-300" onClick={() => document.getElementById("my_modal_3").showModal()}>
                 LogIn
               </a>
               <Login/>
-            </div>
+            </div>      
+             }
+            
           </div>
         </div>
       </div>

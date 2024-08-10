@@ -1,9 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
-import list from '../../public/list.json'
+
 import { Link } from "react-router-dom";
 import Cards from "../components/Cards";
+import axios from "axios";
+import { useState, useEffect} from 'react';
 const Course = () => {
-  console.log(list)
+  const [books , setBooks] = useState([]);
+  useEffect(() => {
+    const getBooks = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/book")
+        const data = await response.data
+        setBooks(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+    getBooks();
+  }, []);
   return (
     <>
     <div className=" max-w-screen-2xl container md:px-20 px-4">
@@ -28,7 +42,7 @@ const Course = () => {
           </Link>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          {list.map((item) => (
+          {books.map((item) => (
             <Cards key={item.id} item={item} />
           ))}
         </div>

@@ -58,10 +58,6 @@ const AboutUS = () => {
         <p className="text-lg text-gray-700 mb-6 dark:text-gray-500">
           We’d love to hear from you! Whether you have questions about our books, events, or just want to chat about your latest read, feel free to reach out to us at <Link to="./contactus" className="mb-0"><ContactUs/></Link>.
         </p>
-
-        <p className="text-lg text-gray-700 dark:text-gray-500 mt-0">
-          Thank you for being a part of the <span className="text-pink-600">Book Haven</span> community. Happy reading!
-        </p>
       </div>
     </div>
   );

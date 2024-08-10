@@ -1,27 +1,31 @@
-import { useFormik } from 'formik';
-import { useState } from 'react';
-import SuccessModal from '../components/SuccessModal'; // Ensure you have this component
-
+/* eslint-disable no-unused-vars */
+import { useFormik } from "formik";
+import { useState } from "react";
+import SuccessModal from "../components/SuccessModal"; // Ensure you have this component
+import axios from "axios";
+import Login from "./Login";
+import toast from "react-hot-toast";
+import { Navigate ,useLocation, useNavigate} from "react-router-dom";
 const validate = (values) => {
   const errors = {};
-
+ 
   // Name validation
-  if (!values.name) {
-    errors.name = 'Name is required';
+  if (!values.fullname) {
+    errors.fullname = "Name is required";
   }
 
   // Email validation
   if (!values.email) {
-    errors.email = 'Email is required';
+    errors.email = "Email is required";
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = "Email is invalid";
   }
 
   // Password validation
   if (!values.password) {
-    errors.password = 'Password is required';
+    errors.password = "Password is required";
   } else if (values.password.length < 6) {
-    errors.password = 'Password must be at least 6 characters';
+    errors.password = "Password must be at least 6 characters";
   }
 
   return errors;
@@ -29,34 +33,60 @@ const validate = (values) => {
 
 const SignUp = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
+      fullname: "",
+      email: "",
+      password: "",
     },
     validate,
-    onSubmit: (values) => {
-      console.log('Form Data:', values);
-      setShowSuccessModal(true);
+    onSubmit: async (data) => {
+      const userData = {
+        fullname: data.fullname,
+        email: data.email,
+        password: data.password,
+      };
+
+      // Send data to your API
+      const response = await axios
+        .post("http://localhost:4000/user/signup", userData)
+        .then((res) => {
+          if (res.data) {
+            setShowSuccessModal(true);
+            
+          } else {
+            toast.error("Invalid data!");
+          }
+        console.log(res.data);
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
+        })
+        .catch((err) => {
+          if (err.response) {
+            toast.error("Error: " + err.response.data.message);
+          }
+        });
+
       setTimeout(() => {
         setShowSuccessModal(false);
         formik.resetForm();
+        navigate(from, { replace: true });
       }, 1000);
       // Optionally, you can close the modal here if it's needed
-      document.getElementById('my_modal_3')?.close();
+      
+      document.getElementById("my_modal_3")?.close();
     },
   });
 
   return (
     <>
-      <div className="py-1 dark:bg-slate-900">
+      <div className="py-1 dark:bg-slate-900 ">
         <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 dark:bg-slate-800">
           <div className="relative py-3 sm:max-w-xl sm:mx-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
             <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 dark:bg-slate-900">
-
               <form className="max-w-md mx-auto" onSubmit={formik.handleSubmit}>
                 <div>
                   <h1 className="text-2xl font-semibold">SignUp</h1>
@@ -66,16 +96,16 @@ const SignUp = () => {
                     <div className="relative">
                       <input
                         autoComplete="off"
-                        name="name"
+                        name="fullname"
                         type="text"
-                        value={formik.values.name}
+                        value={formik.values.fullname}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600 dark:bg-slate-900"
+                        className="peer placeholder-transparent bg-white h-10 w-full border-b-2 border-gray-300 text-gray-500 focus:outline-none focus:border-rose-600 dark:bg-slate-900"
                         placeholder="User Name"
                       />
                       <label
-                        htmlFor="name"
+                        htmlFor="fullname"
                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                       >
                         User Name
@@ -95,7 +125,7 @@ const SignUp = () => {
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600 dark:bg-slate-900"
+                        className="peer bg-white placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-500 focus:outline-none focus:border-rose-600 dark:bg-slate-900"
                         placeholder="Email Address"
                       />
                       <label
@@ -119,7 +149,7 @@ const SignUp = () => {
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600 dark:bg-slate-900"
+                        className="peer bg-white placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-500 focus:outline-none focus:border-rose-600 dark:bg-slate-900"
                         placeholder="Password"
                       />
                       <label
@@ -138,7 +168,7 @@ const SignUp = () => {
                     <div className="relative">
                       <button
                         type="submit"
-                        className="bg-pink-500 text-white rounded-md px-2 py-1"
+                        className="bg-pink-500 text-white rounded-md px-2 py-2"
                       >
                         Submit
                       </button>
@@ -150,10 +180,13 @@ const SignUp = () => {
                 Have an account?
                 <button
                   className="font-semibold leading-6 text-black-600 hover:text-black-500 text-lg px-2 dark:text-gray-500"
-                  onClick={() => document.getElementById('my_modal_3')?.showModal()}
+                  onClick={() =>
+                    document.getElementById("my_modal_3")?.showModal()
+                  }
                 >
                   LogIn
                 </button>
+                <Login />
               </p>
             </div>
           </div>

@@ -5,7 +5,7 @@ const Cards = ({ item }) => {
   return (
     <>
     <div className="mt-4 my-3 p-3 dark:text-black">
-    <div className="h-[450px] card w-92 bg-base-100 shadow-xl hover:scale-105 duration-200 dark:bg-slate-900 dark:text-white dark:border">
+    <div className="h-[450px] card w-92  shadow-xl hover:scale-105 duration-200 dark:bg-slate-900 dark:text-white dark:border bg-gray-50">
   <figure>
     <img
       src={item.image}
@@ -20,7 +20,7 @@ const Cards = ({ item }) => {
     <p>{item.title}</p>
     <div className="card-actions justify-between">
     <div
-  className="badge badge-ghost"
+  className="badge badge-ghost bg-slate-50 text-gray-900"
   style={{ textDecoration: item.category === 'free' ? 'line-through' : 'none' }}
 >
   {item.price}
